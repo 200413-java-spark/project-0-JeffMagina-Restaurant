@@ -1,2 +1,1 @@
-javac Takeout.java
-java Takeout
+java -cp target/takeout-0.1.3.jar com.github.jeffmagina.takeout.Takeout

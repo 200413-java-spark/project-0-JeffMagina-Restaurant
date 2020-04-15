@@ -1,14 +1,35 @@
-# Version 0.1.1
-## Change
-* Create custom food class
+# Version 0.1.3
+## Added
+* Maven Project
+* pom.xml
+* Order.java (blank for now)
+* Cashier.java
+
+## Changed
+* all files to be placed into package
+* all files to be organized better via src/main/java file directory framework
+    * Following methods moved from main to Cashier methods
+        - takeOrder()
+        - calcCost()
+        - giveChange()
+        - greeting()
+        - personalGreeting()      
+* changed food variables to public -> will eventually changed to private with a get function
+
+# Version 0.1.2
+## Added
+* Food.java
+* Create Storage Function to parse user input
+* Create Cost of order Function
+
+## Changed
+
 * Store Menu from Restaurant in a Custom Array List
 * Polish CustomArrayList class to have the following:
     * addMenuItem(name,cost)
     * get(index i)
     * size()
     * printMenu()
-* Create Storage Function to parse user input
-* Create Cost of order Function
 
 # Version 0.1.1
 ## Added

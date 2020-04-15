@@ -1,4 +1,6 @@
+package com.github.jeffmagina.customarraylist;
 
+import com.github.jeffmagina.food.*;
 
 public class CustomArrayList {
 

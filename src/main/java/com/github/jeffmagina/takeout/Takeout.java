@@ -1,3 +1,8 @@
+package com.github.jeffmagina.takeout;
+
+import com.github.jeffmagina.customarraylist.*;
+import com.github.jeffmagina.cashier.*;
+
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 //import java.text.NumberFormat;
@@ -23,18 +28,16 @@ class Takeout{
         readyStatus = order = "";
         ArrayList<String> fullOrder = new ArrayList<>();
         double orderCost , customerPayment, change = 0;
+        Cashier cashier = new Cashier("Jim");
 
         //Greet Customer and ask for name
-        System.out.println("Hello valued Customer!\nWelcome to Jeff's Restaurant!");
-        System.out.print("Please enter your name for the Togo Order: ");
+        cashier.greeting();
 
         //Store Customer name
         String customerName = System.console().readLine();
 
         //Print Greeting for Customer
-        System.out.println("\nHello, " + customerName +
-        ", Welcome once again to Jeff's Restaurant! \n" +
-        "Please take a minute to look over our menu options.\n"); 
+        cashier.personalGreeting(customerName);
 
         //Print out Menu
         menu.printMenu(menu);
