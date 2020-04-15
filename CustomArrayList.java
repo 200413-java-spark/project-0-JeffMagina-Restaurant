@@ -1,31 +1,41 @@
-import java.util.ArrayList;
-import java.text.NumberFormat;
+
 
 public class CustomArrayList {
-    public class Food{
-        String name;
-        double cost;
+
+    //size of list
+    private int CustomArrayListSize = 0;
     
-        Food(String name, double cost){
-            this.name = name;
-            this.cost = cost;
-        }  
+    //storage for all elements in collection
+    private Food storage[];
+
+    //Constructor for CustomArrayList
+    public CustomArrayList(int menuSize) {
+        storage = new Food[menuSize];
     }
+
+    //Add method
     public void addMenuItem(String name, double cost){
-        
-        ArrayList<Food> menu = new ArrayList<>();
-
-            menu.add(new Food(name,cost));
-
-       printMenuItems(menu);
+        Food menuItem = new Food(name,cost);
+        storage[CustomArrayListSize] = menuItem;
+        CustomArrayListSize++;
+    }
+    
+    //Get method
+    public Food get(int i){
+        if (i >= CustomArrayListSize || i < 0){
+            throw new IndexOutOfBoundsException("Index: " + i + ", Size " + i);
+        } return storage[i];
     }
 
-    public void printMenuItems(ArrayList<Food> menu){
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        for (int i = 0; i < menu.size(); i++){
-            Food food = menu.get(i);
+    //Return length
+    public int size(){
+        return CustomArrayListSize;
+    }
 
-            System.out.println(food.name + " " + format.format(food.cost));
-        }
+    //Print out CustomArrayList
+    public void printMenu(CustomArrayList menu){
+        for(int i = 0; i< menu.size(); i++){
+            System.out.println(menu.get(i).name + " " + menu.get(i).cost);
+        } 
     }
 }
