@@ -1,3 +1,18 @@
+# Version 0.2.1
+## Added
+* Add all files into a restaurant directory
+* Main.java file
+* Customer.java
+
+## Changed
+* Modify all class to be more object oriented
+* clean takeout.java move to main.java and make main simpler
+* Order.java populated with 5 variables
+
+## Removed
+* takeout.java
+* CustomArrayList
+
 # Version 0.1.4
 ## Added
 * In Cashier.java
