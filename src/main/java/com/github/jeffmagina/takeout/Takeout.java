@@ -3,7 +3,6 @@ package com.github.jeffmagina.takeout;
 import com.github.jeffmagina.customarraylist.*;
 import com.github.jeffmagina.cashier.*;
 
-import java.util.StringTokenizer;
 import java.util.ArrayList;
 //import java.text.NumberFormat;
 
@@ -24,10 +23,10 @@ class Takeout{
         menu.addMenuItem("Fries", 3.00);
 
         //Global variable initializations
-        String readyStatus, order;
-        readyStatus = order = "";
-        ArrayList<String> fullOrder = new ArrayList<>();
-        double orderCost , customerPayment, change = 0;
+        String readyStatus, order, custResponse;
+        readyStatus = order = custResponse = "";
+        ArrayList<String> custOrder = new ArrayList<>();
+        double orderCost , customerPayment = 0;
         Cashier cashier = new Cashier("Jim");
 
         //Greet Customer and ask for name
@@ -41,10 +40,10 @@ class Takeout{
 
         //Print out Menu
         menu.printMenu(menu);
-        //Prompt user to select if they are ready
-        System.out.println("\nWhen you are ready, just type in \"ready\"\n" + 
-        "If you would like to see menu again type in \"menu\"\n" + 
-        "or if you would like to leave the restaurant type in \"exit\"");
+        
+        //Prompt customer with options
+
+        cashier.options();
 
         //Check user entry if valid option
         while(!readyStatus.equals("exit")){
@@ -52,44 +51,55 @@ class Takeout{
             readyStatus = System.console().readLine().toLowerCase();
 
             if(readyStatus.equals("ready")){
-                System.out.print("\n" + customerName + " is ready to order.\nPlease place your order now with spaces in between items like so.\nex. Fries Steak\n\nOrder: ");
-                
-                //Prompt Customer to input order
+                System.out.println("you are here");
+
+                //Prompt user to place order
+                cashier.isReadyToOrder(customerName);
+
+                //Customer inputs order
                 order = System.console().readLine();
 //****************************CHECK TO MAKE SURE ORDER IS VALID */
                 // Store Customer Order
-                fullOrder = storeOrder(order);
+                custOrder = cashier.takeOrder(order);
 
                 //Confirm order
-                System.out.println("Your order is: ");
-                for(int i = 0; i <fullOrder.size(); i++){
-                    System.out.println(fullOrder.get(i));
+
+                custResponse = cashier.confirmOrder(custOrder);
+
+                //LOOP TO CHECK IF IT IS CORRECT
+
+                if (custResponse.equals("yes")){
+                
+                    // Calculate Cost of Customer Order
+                    orderCost = cashier.calcCost(custOrder,menu);
+
+                    // Tell the Customer the cost of the order
+                    cashier.explainCost(orderCost); 
+
+                    //************* */ Prompt Customer for amount of payment, and check to make sure it is sufficient funds
+                    cashier.promptPayment();
+                
+                    customerPayment = Double.parseDouble(System.console().readLine());
+                    System.out.println(customerPayment);
+
+                    // Give thank customer, give Customer order
+                    cashier.deliverOrder(custOrder);
+
+                    //create change and give change
+
+                    cashier.deliverChange(customerPayment,orderCost);
+
+                    //******************Ask customer if they would like to place another order or exit, revert to prompt before
+                    
+                } else if (custResponse.equals("no")){
+                    //*****************Send back to confirm order?
+                } else {
+                    System.out.println("Invalid Response");
+                    //*************** Ask to input response again
                 }
-                System.out.println("Is this correct:? ");
-                //******************************************ADD A LOOP TO CHECK IF IT IS CORRECT */
 
-                // Calculate Cost of Customer Order
-                orderCost = calcCost(fullOrder,menu);
 
-                // Tell the Customer the cost of the order
-                System.out.println("Your order will cost: " + orderCost);
-
-                //************* */ Prompt Customer for amount of payment, and check to make sure it is sufficient funds
-                System.out.print("Please give amount that you are going to pay: ");
-                customerPayment = Double.parseDouble(System.console().readLine());
-                System.out.println(customerPayment);
-
-                // Give thank customer, give Customer order
-                System.out.println("Thank you for selecting Jeff's Restaurant for your restaurant of choice");
-                System.out.println("Here is you order: " + fullOrder);
-
-                //create change and give change
-                change = customerPayment - orderCost;
-                System.out.println("Here is your change for your order: " + change);
-
-                //Ask customer if they would like to place another order or exit, revert to prompt before
-
-                System.exit(1);
+                //System.exit(1);
 
             } else if (readyStatus.equals("menu")) {
                 // Reprint Menu
@@ -100,33 +110,10 @@ class Takeout{
                 // Show user error message and bring them back to options
                 System.out.println("Invalid Entry!\n Please type in \"ready\", \"menu\", or \"exit\"");
             }
-            System.out.println("\nWhen you are ready, just type in \"ready\"\n"
-                    + "If you would like to see menu again type in \"menu\"\n"
-                    + "or if you would like to leave the restaurant type in \"exit\"");
+            cashier.options();
         }
     }
 //Function to store order into an ArrayList
-    static ArrayList<String> storeOrder(String order) {
-        StringTokenizer orderToken = new StringTokenizer(order, " ");
-          ArrayList<String> orderArray = new ArrayList<>();
-          while(orderToken.hasMoreTokens()){ 
-              orderArray.add(orderToken.nextToken()); 
-            }
-            return orderArray;
-          
-    }
 
 //Function to calculate cost of Food Order
-    static double calcCost(ArrayList<String> order,CustomArrayList menu){
-        double cost = 0;
-        
-        for(int i = 0; i<order.size(); i++){
-            for(int j = 0; j<menu.size(); j++){
-                if(order.get(i).equals(menu.get(j).name)){
-                    cost = cost + menu.get(j).cost;
-                }
-            } 
-        }
-        return cost;
-    }
 }

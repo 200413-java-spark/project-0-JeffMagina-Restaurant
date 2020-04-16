@@ -1,3 +1,15 @@
+# Version 0.1.4
+## Added
+* In Cashier.java
+    - deliverOrder()
+    - explainCost()
+    - promptPayment()
+    - giveChange -> deliverChange()
+    - options()
+    - isReadyToOrder(String)
+    - confirmOrder(ArrayList)
+
+
 # Version 0.1.3
 ## Added
 * Maven Project
