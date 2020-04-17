@@ -17,3 +17,8 @@ target/maven-archiver/pom.properties
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 target/takeout-0.1.3.jar
+target/classes/com/github/jeffmagina/restaurant/readresourcefile/ReadResourceFile.class
+target/classes/com/github/jeffmagina/restaurant/parsefile/ParseFile.class
+target/classes/com/github/jeffmagina/restaurant/orderhistory/OrderHistory.class
+target/classes/com/github/jeffmagina/restaurant/customerorder/CustomerOrder.class
+target/classes/OrderForm.txt

@@ -1,13 +1,19 @@
-# Version 0.2.1
+# Version 1.0.0
 ## Added
+* Added resource folder to maven project that holds read in file
+* Added read from file functionality
 * Add all files into a restaurant directory
 * Main.java file
-* Customer.java
+* CustomerOrder.java
+* parsefile function added in main class to parse file that is read in into useable arguments
+* OrderHistory (Empty)
 
 ## Changed
 * Modify all class to be more object oriented
 * clean takeout.java move to main.java and make main simpler
-* Order.java populated with 5 variables
+* Order.java changed to customer order and populated with 5 variables
+* consolidated methods in cashier class
+* Updated .gitignore
 
 ## Removed
 * takeout.java

@@ -6,9 +6,19 @@ import java.util.ArrayList;
 public class Menu {
     
     //Create menu storage
-    ArrayList<Food> menu = new ArrayList<Food>();
+    private ArrayList<Food> menu = new ArrayList<Food>();
     
-    public Menu(){};
+    //*********************Make menu maybe map so i can count how many steaks for example and display that */
+    
+    public Menu(){}
+    
+    public void populateMenu(){
+        addMenuItem("chicken", 9.50);
+        addMenuItem("steak", 10.50);
+        addMenuItem("fish", 8.50);
+        addMenuItem("vegetarian", 6.00);
+        addMenuItem("fries", 3.00); 
+    }
 
     public void addMenuItem(String name, double cost){
         Food menuItem = new Food(name,cost);
