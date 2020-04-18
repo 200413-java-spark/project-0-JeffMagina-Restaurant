@@ -1,10 +1,10 @@
 # Restaurant Takeout orders
 
 ## Input:
-* A plain text file in the following form:
-Name
-Order
-Payment
+* A plain text file in the following form:\
+Name\
+Order\
+Payment\
 
 ## Expected Output
 * Console expected to output a greeting, take an order, do a transaction with the order, store the order
