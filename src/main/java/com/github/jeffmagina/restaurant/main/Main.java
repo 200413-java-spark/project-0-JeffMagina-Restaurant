@@ -1,60 +1,45 @@
 package com.github.jeffmagina.restaurant.main;
 
+import com.github.jeffmagina.io.IO;
 import com.github.jeffmagina.restaurant.cashier.Cashier;
 import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
 import com.github.jeffmagina.restaurant.menu.Menu;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
-import com.github.jeffmagina.restaurant.readresourcefile.*;
+public class Main {
+	public static void main(String[] args) {
+		// Create Objects needed
+		Cashier cashier = new Cashier("Jeff");
+		Menu jeffsMenu = new Menu();
+		CustomerOrder customerOrder = new CustomerOrder();
+		ArrayList<CustomerOrder> custOrders = new ArrayList<>();
+		
+		File history = new File("history.txt");
+		File orderForm = new File("C:\\Users\\Jeff\\Revature\\project-0\\src\\main\\resources\\OrderForm.txt");
 
+		// Read File and Create Customer Order
+		IO readOrderForm = new IO();
+		try {
+			customerOrder = readOrderForm.ParseCustOrderForm(orderForm);
+		} catch (IOException e) {
+			System.out.println("Error has occured reading file");
+		}
 
-public class Main {    
-    public static void main(String [] args) throws IOException{
-            //Create Objects needed
-            Cashier cashier = new Cashier("Jeff");
-            Menu jeffsMenu = new Menu();
-            ReadResourceFile readFile = new ReadResourceFile();
-            CustomerOrder customerOrder = new CustomerOrder();
+		// Populate Menu
+		jeffsMenu.populateMenu();
 
-            //Read File
-            readFile.readFile("OrderForm.txt");
+		// Cashier interactions with customer
+		cashier.greeting(customerOrder, jeffsMenu);
+		cashier.takeOrder(customerOrder);
+		cashier.transaction(customerOrder, jeffsMenu);
+		cashier.storeOrder(customerOrder);
+		// cashier.displayOrderHistory(); // database stuff
 
-            //Create Customer Order
-            customerOrder = ParseFile2(readFile.message);
-            
-            //Populate Menu
-            jeffsMenu.populateMenu();
-
-            //Cashier interactations with customer
-            cashier.greeting(customerOrder,jeffsMenu);
-            cashier.takeOrder(customerOrder);
-            cashier.transaction(customerOrder,jeffsMenu);
-            cashier.storeOrder(customerOrder);
-            cashier.displayOrderHistory(); //databasestuff       
-    }
-
-    public static CustomerOrder ParseFile2(ArrayList<String> file){
-        CustomerOrder customerOrder = new CustomerOrder();
-
-        // add customer name to customer order from file
-        customerOrder.name = file.get(0);
-
-        // add customer order to customer order from file
-        String order = file.get(1);
-        StringTokenizer orderToken = new StringTokenizer(order, " ");
-            ArrayList<String> custOrder = new ArrayList<>(); 
-            while(orderToken.hasMoreTokens()){
-                custOrder.add(orderToken.nextToken().toLowerCase());
-            }
-        customerOrder.order = custOrder;
-
-        // add customer payment amount to customer order from file
-        customerOrder.paymentAmount = Double.parseDouble(file.get(2));
-        return customerOrder;
-
-    }
+		IO write = new IO();
+		write.write(history, customerOrder);
+		write.read(history, customerOrder, custOrders);
+	}
 }
-

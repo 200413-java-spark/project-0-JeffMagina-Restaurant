@@ -1,3 +1,17 @@
+# Version 1.0.1
+## Added
+* history.txt file for history of orders
+
+# Changed
+* pom.xml to have Intellisense scheme
+* CustomerOrder.java to have a Overrided toString method
+* Read ResourceFile changed to IO.java and added ability to read and write to history.txt
+* Updated .gitignore
+* Main.java now writes to a history.txt
+
+# Deleted
+* Customer.java not needed at the moment
+
 # Version 1.0.0
 ## Added
 * Added resource folder to maven project that holds read in file

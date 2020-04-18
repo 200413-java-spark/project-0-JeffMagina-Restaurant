@@ -34,5 +34,10 @@ public class CustomerOrder {
             throw new IndexOutOfBoundsException("Index: " + i + ", Size " + i);
         } return order.get(i);
     }
+    
+    @Override
+    public String toString() {
+    	return this.name + " " + this.order + " " + this.orderCost + " " + this.paymentAmount + " " + this.changeGiven;
+    }
 
 }
