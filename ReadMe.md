@@ -18,7 +18,6 @@ Our menu options are:
 (display menu options)  
 
 The order you have placed is:   
-
 (display customer order)  
 
 The cost of your order is: (order cost)  
@@ -28,12 +27,11 @@ Your payment amount was: (customer payment)
 Your change is: (Change Given)  
 
 Order Stored:  
-(Order that is stored in form:)  
-    Customer Name: (Customer Name)  
-    Customer Order: (Customer Order)  
-    Order Cost: (Customer Order Cost)  
-    Customer Payment: (Customer Payment)  
-    Customer Change: (Customer Change Given)  
+Customer Name: (Customer Name)  
+Customer Order: (Customer Order)  
+Order Cost: (Customer Order Cost)  
+Customer Payment: (Customer Payment)  
+Customer Change: (Customer Change Given)  
 
 ### history.txt Expected Output
 (Customer Name) (Customer Order) (Customer Order Cost) (Customer Payment) (Customer Change Given)
