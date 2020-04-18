@@ -8,6 +8,7 @@
 * Read ResourceFile changed to IO.java and added ability to read and write to history.txt
 * Updated .gitignore
 * Main.java now writes to a history.txt
+* Update ReadMe.md
 
 # Deleted
 * Customer.java not needed at the moment
