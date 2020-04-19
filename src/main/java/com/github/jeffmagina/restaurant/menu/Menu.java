@@ -10,7 +10,9 @@ public class Menu {
     
     //*********************Make menu maybe map so i can count how many steaks for example and display that */
     
-    public Menu(){}
+    public Menu(){
+    	populateMenu();
+    }
     
     public void populateMenu(){
         addMenuItem("chicken", 9.50);
@@ -22,12 +24,12 @@ public class Menu {
 
     public void addMenuItem(String name, double cost){
         Food menuItem = new Food(name,cost);
-        menu.add(menuItem);
+         this.menu.add(menuItem);
     }
 
     public void displayMenu(){
-        for(int i = 0; i < menu.size(); i++){
-            System.out.println(menu.get(i).name + ", " + menu.get(i).cost);  
+        for(int i = 0; i < this.menu.size(); i++){
+            System.out.println(this.menu.get(i).name + ", " + this.menu.get(i).cost);  
         }
     }
 
@@ -36,9 +38,9 @@ public class Menu {
     }
 
     public Food getItem(int i){
-        if (i >= menu.size() || i < 0){
+        if (i >= this.menu.size() || i < 0){
             throw new IndexOutOfBoundsException("Index: " + i + ", Size " + i);
-        } return menu.get(i);
+        } return this.menu.get(i);
     }
 
 }

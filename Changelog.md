@@ -1,3 +1,15 @@
+# Version 1.0.2
+## Changed
+* Update IO.java to handle exceptions
+* Updated Menu.java to create menu in the constructor
+* Cleaned up Main.java to be a bootstrap or start up for project
+* Made an interaction method for Cashier that calls:
+** greeting()
+** takeOrder()
+** transaction()
+** storeOrder()
+* Moved OrderForm.txt out of Resources folder and into main folder for ease of use
+
 # Version 1.0.1
 ## Added
 * history.txt file for history of orders

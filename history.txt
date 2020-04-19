@@ -1,8 +1,0 @@
-Gary [steak, steak, steak, steak] 42.0 80.0 38.0
-Gary [steak, steak, steak, steak] 42.0 60.0 18.0
-Gary [steak, steak, steak, steak] 42.0 60.0 18.0
-Gary [steak, steak, steak, steak] 42.0 65.0 23.0
-Gary [steak, steak, steak, steak] 42.0 65.0 23.0
-Gary [steak, steak, steak, steak] 42.0 65.0 23.0
-Gary [steak, steak, steak, steak] 42.0 150.0 108.0
-Gary [steak, steak, steak, steak] 42.0 150.0 108.0

@@ -50,7 +50,7 @@ public class IO {
 	}
 
 	// Reads file one line
-	private ArrayList<String> readFile(File fileName) throws IOException {
+	private ArrayList<String> readFile(File fileName) {
 		ArrayList<String> message = new ArrayList<>();
 		
 		try (FileReader in = new FileReader(fileName); 
@@ -69,7 +69,7 @@ public class IO {
 		return message;
 	}
 
-	public CustomerOrder ParseCustOrderForm(File fileName) throws IOException {
+	public CustomerOrder ParseCustOrderForm(File fileName) {
 
 		ArrayList<String> message = new ArrayList<>();
 		message = readFile(fileName);
