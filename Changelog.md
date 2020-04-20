@@ -1,3 +1,13 @@
+# Version 1.0.3
+## Added
+* add dependency in pom.xml for Junit 
+* Test case for CalcCost()
+
+## Changed
+* changed variable names in CustomerOrder.java in constructor to make more sense
+* changed cashier Constructor from asking for a name to a default constructor and gave the Cashier a permanent name;
+* changed main cashier constructor to reflect change above
+
 # Version 1.0.2
 ## Changed
 * Update IO.java to handle exceptions

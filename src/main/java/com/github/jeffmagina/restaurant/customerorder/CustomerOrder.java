@@ -9,10 +9,11 @@ public class CustomerOrder {
     public double paymentAmount;
     public double changeGiven;
 
-    public CustomerOrder(String name, ArrayList<String> order, double payment, double paymentAmount, double changeGiven){
+    
+    public CustomerOrder(String name, ArrayList<String> order, double orderCost, double paymentAmount, double changeGiven){
         this.name = name;
         this.order = order;
-        this.paymentAmount = payment;
+        this.orderCost = orderCost;
         this.paymentAmount = paymentAmount;
         this.changeGiven = changeGiven;
     }

@@ -10,14 +10,13 @@ import com.github.jeffmagina.restaurant.menu.Menu;
 
 public class Cashier {
 
-	private String name;
+	final public String name = "Jeff";
 	
 	private ArrayList<CustomerOrder> custOrders = new ArrayList<>();
 	public Menu menu = new Menu();
 	private CustomerOrder custOrder = new CustomerOrder();
 
-	public Cashier(String name) {
-		this.name = name;
+	public Cashier() {
 	}
 	
 	public void interaction() {
@@ -81,7 +80,7 @@ public class Cashier {
         writer.read(history, custOrder, this.custOrders);
     }
 	
-	private double calcCost(CustomerOrder order) {
+	public double calcCost(CustomerOrder order) {
 		double cost = 0.0;
 		for (int i = 0; i < order.size(); i++) {
 			for (int j = 0; j < this.menu.size(); j++) {
