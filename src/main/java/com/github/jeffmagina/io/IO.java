@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
+import com.github.jeffmagina.format.Format;
 import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
 
 public class IO {
@@ -35,7 +35,8 @@ public class IO {
 	// Reads whole file all lines
 	public void read(File fileName, CustomerOrder customerOrder, List<CustomerOrder> custOrders) {
 		// Read from file
-		try (FileReader in = new FileReader(fileName); BufferedReader br = new BufferedReader(in);) {
+		try (FileReader in = new FileReader(fileName); 
+				BufferedReader br = new BufferedReader(in);) {
 			String line = br.readLine();
 			while (line != null) {
 				System.out.println(line);
@@ -50,17 +51,20 @@ public class IO {
 	}
 
 	// Reads file one line
-	private ArrayList<String> readFile(File fileName) {
-		ArrayList<String> message = new ArrayList<>();
-		
+	private String readFile(File fileName) {
+		// ArrayList<String> message = new ArrayList<>();
+		String message = "";
+
 		try (FileReader in = new FileReader(fileName); 
 				BufferedReader reader = new BufferedReader(in);) {
 
-			String line ="";
+			String line = "";
 			while ((line = reader.readLine()) != null) {
-				message.add(line);
+				// message.add(line);
+				message = line;
 			}
 			reader.close();
+			// return line;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -71,27 +75,33 @@ public class IO {
 
 	public CustomerOrder ParseCustOrderForm(File fileName) {
 
-		ArrayList<String> message = new ArrayList<>();
-		message = readFile(fileName);
+		// read in raw data from file to a string
+		String message = readFile(fileName);
+		Format format = new Format();
+
+		// take raw string data parse and format
+		ArrayList<String> customerTicket = new ArrayList<String>();
+		customerTicket = format.splitTokens(message,",");
+		format.firstLettertoUpperCase(customerTicket);
 
 		CustomerOrder customerOrder = new CustomerOrder();
-
+		
 		// add customer name to customer order from file
-		customerOrder.name = message.get(0);
+		customerOrder.name = customerTicket.get(0);
 
-		// add customer order to customer order from file
-		String order = message.get(1);
-		StringTokenizer orderToken = new StringTokenizer(order, " ");
+		// add customer order to string to parse
+		String order = customerTicket.get(1);
+		
+		//take customer order parse, format, and add to customer order
 		ArrayList<String> custOrder = new ArrayList<>();
-		while (orderToken.hasMoreTokens()) {
-			custOrder.add(orderToken.nextToken().toLowerCase());
-		}
+		custOrder = format.splitTokens(order," ");
+		format.firstLettertoUpperCase(custOrder);
 		customerOrder.order = custOrder;
 
 		// add customer payment amount to customer order from file
-		customerOrder.paymentAmount = Double.parseDouble(message.get(2));
+		customerOrder.paymentAmount = Double.parseDouble(customerTicket.get(2));
+		
 		return customerOrder;
 
 	}
-
 }

@@ -1,3 +1,12 @@
+# Version 1.0.4
+## Added
+* implemented a format class to format strings from file
+* added a store order for future storage to a database
+
+##Changed
+* reformatted j unit test
+* took file parsing of orderForm out of cashier class
+
 # Version 1.0.3
 ## Added
 * add dependency in pom.xml for Junit 

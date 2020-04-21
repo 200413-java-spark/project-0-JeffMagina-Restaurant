@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.github.jeffmagina.io.IO;
 import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
 import com.github.jeffmagina.restaurant.menu.Menu;
+import com.github.jeffmagina.restaurant.orderhistory.OrderHistory;
 //import com.github.jeffmagina.restaurant.orderhistory.OrderHistory;
 
 public class Cashier {
@@ -19,17 +20,15 @@ public class Cashier {
 	public Cashier() {
 	}
 	
-	public void interaction() {
-		File orderForm = new File("OrderForm.txt");
-		
-		IO parser = new IO();
-		custOrder = parser.ParseCustOrderForm(orderForm);
+	public CustomerOrder interaction(CustomerOrder custOrder) {	
+		this.custOrder = custOrder;
 		
 		greeting();
 		takeOrder();
 		transaction();
 		storeOrder();
 		
+		return custOrder;
 	}
 
 	private void greeting() {	
@@ -75,16 +74,21 @@ public class Cashier {
         
 		File history = new File("history.txt");
     	IO writer= new IO();
+    	OrderHistory orderhistory = new OrderHistory();
+    	
+    	orderhistory.storeOrder(custOrder);
+    	orderhistory.displayAllOrders();
     	
         writer.write(history, custOrder);
         writer.read(history, custOrder, this.custOrders);
+        
     }
 	
-	public double calcCost(CustomerOrder order) {
+	private double calcCost(CustomerOrder order) {
 		double cost = 0.0;
 		for (int i = 0; i < order.size(); i++) {
 			for (int j = 0; j < this.menu.size(); j++) {
-				if (order.getItem(i).equals(this.menu.getItem(j).name)) {
+				if (order.getItem(i).toLowerCase().equals(this.menu.getItem(j).name.toLowerCase())) {
 					cost = cost + this.menu.getItem(j).cost;
 				}
 			}
