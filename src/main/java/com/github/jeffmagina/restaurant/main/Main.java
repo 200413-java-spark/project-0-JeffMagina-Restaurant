@@ -30,11 +30,14 @@ public class Main {
 		try(Connection conn = DriverManager.getConnection(url,user,password);) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from orderhistory");
-			System.out.println(rs.getString(1));
-			System.out.println(rs.getString(2));
-			System.out.println(rs.getString(3));
-			System.out.println(rs.getString(4));
-		} catch (SQLException e) {
+while(rs.next()){
+			System.out.println(rs.getString("order_id"));
+			System.out.println(rs.getString("name"));
+			System.out.println(rs.getString("ordercost"));
+			System.out.println(rs.getString("paymentamount"));
+			System.out.println(rs.getString("changegiven"));
+}	
+	} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
