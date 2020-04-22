@@ -82,7 +82,7 @@ public class IO {
 		// take raw string data parse and format
 		ArrayList<String> customerTicket = new ArrayList<String>();
 		customerTicket = format.splitTokens(message,",");
-		format.firstLettertoUpperCase(customerTicket);
+		format.wholeArrayListFirstLetterToUpperCase(customerTicket);
 
 		CustomerOrder customerOrder = new CustomerOrder();
 		
@@ -95,7 +95,7 @@ public class IO {
 		//take customer order parse, format, and add to customer order
 		ArrayList<String> custOrder = new ArrayList<>();
 		custOrder = format.splitTokens(order," ");
-		format.firstLettertoUpperCase(custOrder);
+		format.wholeArrayListFirstLetterToUpperCase(custOrder);
 		customerOrder.order = custOrder;
 
 		// add customer payment amount to customer order from file

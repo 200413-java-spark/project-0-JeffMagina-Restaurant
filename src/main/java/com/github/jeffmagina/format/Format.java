@@ -17,15 +17,20 @@ public class Format {
 		return stringBuffer;
 	}
 
-	public void firstLettertoUpperCase(ArrayList<String> stringbuffer) {
+	public void wholeArrayListFirstLetterToUpperCase(ArrayList<String> stringbuffer) {
 		for (int i = 0; i < stringbuffer.size(); i++) {
 			String name = stringbuffer.get(i);
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(Character.toUpperCase(name.charAt(0)));
-			sb.append(name.substring(1).toLowerCase());
-			stringbuffer.set(i, sb.toString());
+			stringbuffer.set(i, firstLettertoUpperCase(name));
 		}
+	}
+	
+	public String firstLettertoUpperCase(String stringbuffer) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(Character.toUpperCase(stringbuffer.charAt(0)));
+		sb.append(stringbuffer.substring(1).toLowerCase());
+		
+		return sb.toString();
 	}
 
 }

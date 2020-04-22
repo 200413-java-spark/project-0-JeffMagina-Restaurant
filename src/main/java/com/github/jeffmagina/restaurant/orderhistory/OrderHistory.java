@@ -12,13 +12,13 @@ public class OrderHistory extends CustomerOrder {
 	}
 
 	public void storeOrder(CustomerOrder custOrder) {
-		this.allOrders.add(custOrder);
+		OrderHistory.allOrders.add(custOrder);
 		// store in database
 	}
 
 	public void displayAllOrders() {
     	for(int i = 0; i < allOrders.size(); i++) {
-    	System.out.println(this.allOrders.get(i));
+    	System.out.println(OrderHistory.allOrders.get(i));
     	}
     }
 }

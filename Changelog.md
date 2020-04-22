@@ -1,9 +1,22 @@
+# Version 1.0.5
+## Added
+* storeorder() and displayAllOrders in orderhistory.java
+* added two test cases for Format.java:
+**SplitTokensTest
+**FirstLetterToUpperCaseTest
+*Added a script to connect to aws server
+
+## Changed
+* Format.java to have a firstLettertoUppercase method and a wholeArrayListFirstLetterToUpperCase rather than having them both in one
+* changed IO.jvaa to reflect above change
+
+
 # Version 1.0.4
 ## Added
 * implemented a format class to format strings from file
 * added a store order for future storage to a database
 
-##Changed
+## Changed
 * reformatted j unit test
 * took file parsing of orderForm out of cashier class
 
