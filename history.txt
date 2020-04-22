@@ -1,3 +1,0 @@
-Gary [Steak, Steak, Steak, Steak] 42.0 150.0 108.0
-Jim [Steak, Fries] 13.5 100.0 86.5
-Jim [Steak, Fries] 13.5 100.0 86.5
