@@ -23,14 +23,17 @@ public class Main {
 
 		// Cashier interactions with customer
 		//cashier.interaction(custOrder);
-		String url = "jdbc:postgresql://localhost:5432/jeffsrestaurantdb";
+		String url = "jdbc:postgresql://localhost:5432/jeffMagina";
 		String user = "jeffMagina";
 		String password = "jeffMagina";
 		
 		try(Connection conn = DriverManager.getConnection(url,user,password);) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from orderhistory");
-			System.out.print(rs);
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(3));
+			System.out.println(rs.getString(4));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
