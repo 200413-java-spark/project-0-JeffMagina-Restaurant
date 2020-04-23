@@ -1,14 +1,8 @@
-CREATE TABLE OrderHistory (
-	order_id serial primary key,
-	name varchar,
-	orderCost decimal,
-	paymentAmount decimal,
-	changeGiven decimal
-);
-CREATE TABLE CustomerOrder (
-        order_id int primary key,
+CREATE TABLE orderhistory (
+    	order_id serial primary key,
         name varchar,
-        quantity int
+        cust_order varchar,
+        orderCost decimal,
+        paymentAmount decimal,
+        changegiven decimal
 );
-ALTER TABLE CustomerOrder
-ADD FOREIGN KEY (order_id) REFERENCES OrderHistory(order_id);

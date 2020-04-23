@@ -3,7 +3,7 @@ package com.github.jeffmagina.restaurant.customerorder;
 import java.util.ArrayList;
 
 public class CustomerOrder {
-    public String name;
+	public String name;
     public ArrayList<String> order;
     public double orderCost;
     public double paymentAmount;

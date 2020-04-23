@@ -26,7 +26,6 @@ public class Cashier {
 		greeting();
 		takeOrder();
 		transaction();
-		storeOrder();
 		
 		return custOrder;
 	}
@@ -59,7 +58,7 @@ public class Cashier {
 
 	}
 
-	private void storeOrder(){
+	public void storeOrder(){
         System.out.println("\nOrder Stored: " );
         System.out.print("Customer Name: ");
         System.out.println(custOrder.name);
@@ -72,15 +71,18 @@ public class Cashier {
         System.out.print("Customer Change: ");
         System.out.println(custOrder.changeGiven);
         
+        //store into database
+        OrderHistory orderhistory = new OrderHistory();
+        orderhistory.storeOrder(custOrder);
+        
+    	//store into textfile
 		File history = new File("history.txt");
     	IO writer= new IO();
-    	OrderHistory orderhistory = new OrderHistory();
-    	
-    	orderhistory.storeOrder(custOrder);
-    	orderhistory.displayAllOrders();
-    	
         writer.write(history, custOrder);
         writer.read(history, custOrder, this.custOrders);
+        
+        //display all orders in database
+        orderhistory.displayAllOrders();
         
     }
 	

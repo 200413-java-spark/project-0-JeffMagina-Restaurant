@@ -39,7 +39,7 @@ public class IO {
 				BufferedReader br = new BufferedReader(in);) {
 			String line = br.readLine();
 			while (line != null) {
-				System.out.println(line);
+				//System.out.println(line);
 				custOrders.add(customerOrder);
 				line = br.readLine();
 			}

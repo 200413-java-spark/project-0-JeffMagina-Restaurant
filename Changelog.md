@@ -1,3 +1,13 @@
+# Version 1.1.0
+## Added
+* Added OrderRepo.java which took testing reading from sql database out of main
+* Added insert functionality for orders into database
+* Added a data source file to hold secure information. ie. url, username, password for database
+
+## Changed
+* Modified schema to simplify for project
+* Cleaned up main file
+
 # Version 1.0.5
 ## Added
 * storeorder() and displayAllOrders in orderhistory.java
@@ -8,7 +18,7 @@
 
 ## Changed
 * Format.java to have a firstLettertoUppercase method and a wholeArrayListFirstLetterToUpperCase rather than having them both in one
-* changed IO.jvaa to reflect above change
+* changed IO.java to reflect above change
 
 
 # Version 1.0.4
