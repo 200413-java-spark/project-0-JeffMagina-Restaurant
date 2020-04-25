@@ -5,39 +5,67 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.github.jeffmagina.format.Format;
-import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
+import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
 
 public class OrderRepo {
-	
-	private ArrayList<CustomerOrder> customerOrders;
-	
+
 	public OrderRepo() {
-		customerOrders = new ArrayList<CustomerOrder>();
 	}
 
-	public void insertAll(List<CustomerOrder> customerOrders) {
-		
+	public CustomerTicket insert(CustomerTicket customerTicket) {
+
 		try (Connection conn = DataSource.getConnection();) {
-			PreparedStatement stmt = conn.prepareStatement("insert into orderhistory(name, cust_order, ordercost, paymentamount, changegiven) values (?, ?, ?, ?, ?)");
-				for (CustomerOrder customerOrder : customerOrders) {
-					stmt.setString(1, customerOrder.name);
-					stmt.setString(2, customerOrder.order.toString());
-					stmt.setDouble(3, customerOrder.orderCost);
-					stmt.setDouble(4, customerOrder.paymentAmount);
-					stmt.setDouble(5, customerOrder.changeGiven);
-					stmt.addBatch();
+
+			PreparedStatement CustomerStmt = conn.prepareStatement("insert into customer(name) values (?)");
+			CustomerStmt.setString(1, customerTicket.customer.name);
+			CustomerStmt.addBatch();
+			CustomerStmt.executeBatch();
+
+			// GET CUSTOMER ID FOR ORDER STATEMENT
+			Statement CustomerIDSelectStmt = conn.createStatement();
+			ResultSet CustomerIDrs = CustomerIDSelectStmt.executeQuery("select customerID from customer Where name = '" + customerTicket.customer.name +"'");
+			while (CustomerIDrs.next()) {
+				customerTicket.customer.customerId = CustomerIDrs.getInt("customerID");
+			}
+			
+			PreparedStatement orderStmt = conn.prepareStatement("insert into customerTicket(customerID,orderCost,paymentAmount,changeGiven) values (?, ?, ?, ?)");
+			orderStmt.setInt(1, customerTicket.customer.customerId);
+			orderStmt.setDouble(2, customerTicket.orderCost);
+			orderStmt.setDouble(3, customerTicket.paymentAmount);
+			orderStmt.setDouble(4, customerTicket.changeGiven);
+			orderStmt.addBatch();
+			orderStmt.executeBatch();
+
+			// GET CustomerTicketID
+			Statement orderIDSelectStmt = conn.createStatement();
+			ResultSet orderIDrs = orderIDSelectStmt.executeQuery("select customerTicketID from customerTicket Where customerId = "+ customerTicket.customer.customerId);
+			while (orderIDrs.next()) {
+				customerTicket.customerTicketId = orderIDrs.getInt("customerTicketID");
+			}
+			
+			for (int i = 0; i < customerTicket.order.size(); i++) {
+				PreparedStatement orderItemStmt = conn.prepareStatement("insert into orderItem(customerTicketID,quantity,name) values (?, ? ,?)");
+				orderItemStmt.setInt(1, customerTicket.customerTicketId);
+				orderItemStmt.setInt(2, customerTicket.order.get(i).quantity);
+				orderItemStmt.setString(3, customerTicket.order.get(i).name);
+				orderItemStmt.addBatch();
+				orderItemStmt.executeBatch();
+				
+				// GET OrderItemID
+				Statement orderTicketIDSelectStmt = conn.createStatement();
+				ResultSet orderTicketIDrs = orderTicketIDSelectStmt.executeQuery("select orderItemID from orderitem Where customerTicketID = " + customerTicket.customerTicketId);
+				while (orderIDrs.next()) {
+					customerTicket.order.get(i).orderItemId = orderTicketIDrs.getInt("orderItemID");
 				}
-				stmt.executeBatch();
+			}		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return customerTicket;
 	}
-	
+/*
 	public ArrayList<CustomerOrder> readAll() {
 		Format format = new Format();
 
@@ -47,10 +75,10 @@ public class OrderRepo {
 			while (rs.next()) {
 				CustomerOrder customerOrder = new CustomerOrder();
 				customerOrder.name = rs.getString("name");
-				
-				//NEED TO FIX
-				customerOrder.order = format.splitTokens(rs.getString("cust_order"),",");
-				
+
+				// NEED TO FIX
+				customerOrder.order = format.splitTokens(rs.getString("cust_order"), ",");
+
 				customerOrder.orderCost = rs.getDouble("ordercost");
 				customerOrder.paymentAmount = rs.getDouble("paymentamount");
 				customerOrder.changeGiven = rs.getDouble("changegiven");
@@ -60,6 +88,6 @@ public class OrderRepo {
 			e.printStackTrace();
 		}
 		return customerOrders;
-	}
+	}*/
 
 }

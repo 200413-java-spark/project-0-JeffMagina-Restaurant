@@ -1,12 +1,11 @@
 package com.github.jeffmagina.restaurant.main;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import com.github.jeffmagina.io.IO;
-import com.github.jeffmagina.io.OrderRepo;
 import com.github.jeffmagina.restaurant.cashier.Cashier;
-import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
+import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.restaurant.orderhistory.OrderHistory;
 
 public class Main {
 	public static void main(String[] args) {
@@ -15,21 +14,20 @@ public class Main {
 		IO parser = new IO();
 
 		// Parse order
-		CustomerOrder custOrder = new CustomerOrder();
-		custOrder = parser.ParseCustOrderForm(orderForm);
+		String rawCustomerTicket = parser.readFile(orderForm);
 
+		CustomerTicket customerTicket= new CustomerTicket();
+		customerTicket = parser.ParseCustOrderForm(rawCustomerTicket);
+		
 		//Cashier interactions with customer
-		cashier.interaction(custOrder);
+		cashier.interaction(customerTicket);
 		
 		//store into file and database
 		cashier.storeOrder();
 		
-		ArrayList<CustomerOrder> custOrders = new ArrayList<CustomerOrder>();
-		custOrders.add(custOrder);
-		
-		
-		
-
+		//displays all orders in OrderHistory
+		OrderHistory orderHistory = new OrderHistory();
+		orderHistory.displayAllOrders();
 		
 		System.out.println("done");
 		

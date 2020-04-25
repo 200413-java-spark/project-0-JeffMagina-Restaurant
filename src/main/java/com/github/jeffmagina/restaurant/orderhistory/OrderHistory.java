@@ -1,30 +1,27 @@
 package com.github.jeffmagina.restaurant.orderhistory;
 
-import com.github.jeffmagina.io.OrderRepo;
-import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
 import java.util.ArrayList;
-//import com.github.jeffmagina.restaurant.customerorder.CustomerOrder;
 
-public class OrderHistory extends CustomerOrder {
+import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
 
-	static ArrayList<CustomerOrder> allOrders = new ArrayList<CustomerOrder>();
-	OrderRepo orderRepo = new OrderRepo();
+public class OrderHistory extends CustomerTicket {
+
+	public static ArrayList<CustomerTicket> customerTickets = new ArrayList<CustomerTicket>();
 
 	public OrderHistory() {
 	}
 
-	public void storeOrder(CustomerOrder custOrder) {
-		
-		allOrders.add(custOrder);
+	public void storeOrder(CustomerTicket customerTicket) {
+
+		customerTickets.add(customerTicket);
 		// store in database
-		orderRepo.insertAll(allOrders);
-		
+		// orderRepo.insertAll(allOrders);
 	}
 
 	public void displayAllOrders() {
-		allOrders = orderRepo.readAll();
-    	for(int i = 0; i < allOrders.size(); i++) {
-    	System.out.println(allOrders.get(i));
-    	}
-    }
+		for (int i = 0; i < customerTickets.size(); i++) {
+			System.out.println(customerTickets.get(i));
+		}
+	}
+
 }

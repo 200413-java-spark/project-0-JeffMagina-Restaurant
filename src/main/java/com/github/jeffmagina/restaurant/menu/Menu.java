@@ -1,15 +1,13 @@
 package com.github.jeffmagina.restaurant.menu;
 
-import com.github.jeffmagina.restaurant.food.Food;
 import java.util.ArrayList;
+
+import com.github.jeffmagina.restaurant.menu.food.Food;
 
 public class Menu {
 
 	// Create menu storage
 	private ArrayList<Food> menu = new ArrayList<Food>();
-
-	// *********************Make menu maybe map so i can count how many steaks for
-	// example and display that */
 
 	public Menu() {
 		populateMenu();
