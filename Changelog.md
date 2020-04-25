@@ -1,3 +1,19 @@
+# Version 1.1.1
+## Added
+* customer.java to contain customer info
+* customer ticket to contain customer ticket information
+* method in IO.java to parse customer ticket info from history text file
+
+## Changed 
+* order.java to contain quantity and name fields for customer orders
+* Modified schema to have 3 tables, Customer, Customer Ticket, and Order Item
+* Modified insert method in OrderRepo.java to grab id numbers from database
+* refactor files to take in customer ticket info rather than customer order info that has been removed
+* reorganized directory files and folders
+
+## Deleted
+* Removed CustomerOrder
+
 # Version 1.1.0
 ## Added
 * Added OrderRepo.java which took testing reading from sql database out of main
