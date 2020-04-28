@@ -1,1 +1,2 @@
-jim,3 StEAK/4 Fries/2 Chicken,150.00
+jOe,2 StEAK/1 Fries/2 Chicken,150.00
+jim,1 StEAK/3 Fries/2 Chicken,120.00

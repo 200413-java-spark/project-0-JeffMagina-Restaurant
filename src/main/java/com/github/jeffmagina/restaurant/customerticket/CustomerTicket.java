@@ -14,12 +14,13 @@ public class CustomerTicket {
 	public double changeGiven;
 
 	public CustomerTicket() {
-	}
-
-	public CustomerTicket(Customer customer, ArrayList<Order> order, double paymentAmount,
-			double orderCost, double changeGiven) {
 		this.customer = new Customer();
 		this.order = new ArrayList<Order>();
+	}
+
+	public CustomerTicket(Customer customer, ArrayList<Order> order, double paymentAmount, double orderCost, double changeGiven) {
+		this.customer = customer;
+		this.order = order;
 		this.paymentAmount = paymentAmount;
 		this.orderCost = orderCost;
 		this.changeGiven = changeGiven;
@@ -43,7 +44,7 @@ public class CustomerTicket {
 			order.append(" ");
 			order.append(this.order.get(i).name);
 			if (i < this.order.size() - 1) {
-				order.append("&");
+				order.append("/");
 			}
 		}
 

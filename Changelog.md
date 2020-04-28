@@ -1,3 +1,26 @@
+
+## Added
+* Functionality to read all rows from tables in database (SqlOrderRepo.java)
+* DAO.java interface which has a insert method and readAll method
+* ParseInputFileRepo.java implements the DAO interface...has methods to read in file and parseFileOrderForm which was previously in IO.java
+* HistoryOutputFileRepo.java implements the DAO interface...has insert method that writes to history text file;
+* get method in Orderhistory to grab an element from the AllCustomerTickets arraylist
+* added two constructors to the Order.java, one to make an order with an order id and one without
+
+## Changed
+* IO.java now used to have a method to storeOrder to database and txt file
+* Renamed datasource.java to SqlDataSource.java to be more properly named
+* added a method for customerTickets to be added to the AllCustomerTickets arraylist of OrderHistory, rather than using a constructor
+* allCustomerTickers from orderHistory to an instance variable rather than a static variable
+* default constructor of CustomerTicket to construct a Customer and an Order
+* Cashier.java used to do storage of data, this has been moved to its own Class
+* this keyword has been added to Cashier.java to improve readability
+* Refactored main.java to reflect all the changes in this patch
+
+## Deleted
+* Format.java 2 methods were removed as they were no longer needed
+* SplitTokensTest not needed as SplitTokens was removed - realized there was a build in String method
+
 # Version 1.1.1
 ## Added
 * customer.java to contain customer info

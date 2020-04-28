@@ -1,1 +1,1 @@
-ssh -i ~/.ssh/linux-demo.pem ec2-user@18.219.14.128
+ssh -i ~/.ssh/linux-demo.pem ec2-user@18.216.94.221
