@@ -1,3 +1,4 @@
+# Version 1.2
 
 ## Added
 * Functionality to read all rows from tables in database (SqlOrderRepo.java)
@@ -20,6 +21,7 @@
 ## Deleted
 * Format.java 2 methods were removed as they were no longer needed
 * SplitTokensTest not needed as SplitTokens was removed - realized there was a build in String method
+* reading from textfile -- not needed (it is done by reading from database)
 
 # Version 1.1.1
 ## Added
