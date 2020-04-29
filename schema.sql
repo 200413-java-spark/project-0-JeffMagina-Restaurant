@@ -6,9 +6,9 @@ CREATE TABLE customer(
 CREATE TABLE customerTicket (
         customerTicketID serial primary key,
         customerID int REFERENCES customer(customerID),
-        orderCost decimal,
-        paymentAmount decimal,
-        changeGiven decimal
+        orderCost decimal(19,2),
+        paymentAmount decimal(19,2),
+        changeGiven decimal(19,2)
 );
 
 CREATE TABLE orderItem (
