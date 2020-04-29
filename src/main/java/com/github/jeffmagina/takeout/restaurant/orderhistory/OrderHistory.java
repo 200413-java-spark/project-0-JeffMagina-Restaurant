@@ -1,8 +1,8 @@
-package com.github.jeffmagina.restaurant.orderhistory;
+package com.github.jeffmagina.takeout.restaurant.orderhistory;
 
 import java.util.ArrayList;
 
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
 
 public class OrderHistory extends CustomerTicket {
 

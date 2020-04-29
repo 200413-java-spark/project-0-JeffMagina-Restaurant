@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.jeffmagina.takeout.format.Format;
+
 public class FirstLetterToUpperCaseTest {
 	
 	String testString;

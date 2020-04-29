@@ -1,14 +1,14 @@
-package com.github.jeffmagina.io;
+package com.github.jeffmagina.takeout.io;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
-import com.github.jeffmagina.restaurant.orderhistory.OrderHistory;
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.orderhistory.OrderHistory;
 
 public class IO {
 
-	public OrderHistory storeOrder(CustomerTicket filledCustomerTicket, String fileName) {
+	public OrderHistory storeOrder(CustomerTicket filledCustomerTicket) {
 		SqlOrderRepo orderRepo = new SqlOrderRepo();
 		// insert into database
 		orderRepo.insert(filledCustomerTicket);
@@ -18,19 +18,19 @@ public class IO {
 		orderHistory.addCustomerTickets(orderRepo.readAll());
 		
 		// delete oldhistory.txt file
-		File oldhistory = new File(fileName);
-		oldhistory.delete();
+		File oldHistory = new File("history.txt");
+		oldHistory.delete();
 
 		// create newhistory.txt file
-		File newhistory = new File(fileName);
+		File newHistory = new File("history.txt");
 		try {
-			newhistory.createNewFile();
+			newHistory.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// insert database data into .txt file
-		HistoryOutputFileRepo writer = new HistoryOutputFileRepo(newhistory);
+		HistoryOutputFileRepo writer = new HistoryOutputFileRepo(newHistory);
 		for (int i = 0; i < orderHistory.allCustomerTickets.size(); i++) {
 			writer.insert(orderHistory.allCustomerTickets.get(i));
 		}

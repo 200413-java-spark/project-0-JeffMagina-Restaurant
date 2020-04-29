@@ -1,5 +1,20 @@
-# Version 1.2
+# Version 1.2.1
+## Added
+* ability to add just one takeout order from command line or read from file
+* validity: 
+	** make sure an order is on menu
+	** make sure quantity is a number
+	** make sure payment amount is a number
 
+##Changed
+* static location of orderform.txt inside code and moved to input of parse in command line
+* storage of ordercost, payment amount and changed given to be of big decimal to print in "currency" format
+* storage in database and text file changed 2 be always 2 decimal to resemble currency format
+* changed directory format
+* changed exceptions to not just print stack trace but a useful error message
+* moved parseorderform and parsecustorderforms to format class to accommodate for main functionality with single orders or text file read orders
+
+# Version 1.2.0
 ## Added
 * Functionality to read all rows from tables in database (SqlOrderRepo.java)
 * DAO.java interface which has a insert method and readAll method

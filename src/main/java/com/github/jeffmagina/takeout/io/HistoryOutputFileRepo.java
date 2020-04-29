@@ -1,4 +1,4 @@
-package com.github.jeffmagina.io;
+package com.github.jeffmagina.takeout.io;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
 
 public class HistoryOutputFileRepo implements Dao<CustomerTicket> {
 	private File fileName;

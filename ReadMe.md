@@ -1,76 +1,41 @@
-# Restaurant Takeout orders
+# Restaurant Takeout
+A console app to place takeout orders
 
-## Input:
-* A plain text file in the following form:  
-Name  
-Order  
-Payment  
+## Build
+### Java
+>mvn clean compile 
 
-## Expected Output
-* Console expected to output a greeting, take an order, do a transaction with the order, store the order
-* Write to a history.txt which holds a history of all orders
+## Usage
+### For txt file batch operations
+>mvn exec:java -Dexec.args="parse OrderForm.txt"
 
-### Console Expected Output
-Hello (display customer name) ! My name is Jeff!  
-Welcome to Jeff's Restaurant!  
-Our menu options are:  
+### For single operations
+>mvn exec:java -Dexec.args="Jim '2 Fries' 120"
 
-(display menu options)  
+## Design
+### Architecture
+- Takeout is a command line application
+- The restaurant package defines a Customer class, a Menu Class filled with Food type Variables(name and cost), a Cashier class that interacts with the Customer, a Customer Ticket class which holds takeout information and an OrderHistory class which contains multiple CustomerTickets
+- io.ParseInputFileRepo reads in a txt file with multiple takeout orders and places them into a List of CustomerTickets
+- The io.SqlDataSource creates Connection objects for SqlOrderRepository
+- The io.SqlOrderRepos inserts and selects data from a sql database on an AWS server
+- The io.HistoryOutFileRepo writes database information into a txt file
 
-The order you have placed is:   
-(display customer order)  
-
-The cost of your order is: (order cost)  
-
-Your payment amount was: (customer payment)  
-
-Your change is: (Change Given)  
-
-Order Stored:  
-Customer Name: (Customer Name)  
-Customer Order: (Customer Order)  
-Order Cost: (Customer Order Cost)  
-Customer Payment: (Customer Payment)  
-Customer Change: (Customer Change Given)  
-
-### history.txt Expected Output
-(Customer Name) (Customer Order) (Customer Order Cost) (Customer Payment) (Customer Change Given)
-
-## Example Input and Output
-### Example Input
-Gary  
-Steak Steak Steak Steak  
-150.00  
-
-### Console Expected Output
-Hello Gary! My name is Jeff!  
-Welcome to Jeff's Restaurant!  
-Our menu options are:  
-
-chicken, 9.5  
-steak, 10.5  
-fish, 8.5  
-vegetarian, 6.0  
-fries, 3.0  
-
-The order you have placed is:  
-steak  
-steak  
-steak  
-steak  
-
-The cost of your order is: 42.0  
-
-Your payment amount was: 150.0  
-
-Your change is: 108.0  
-
-Order Stored:  
-Customer Name: Gary  
-Customer Order: [steak, steak, steak, steak]  
-Order Cost: 42.0  
-Customer Payment: 150.0  
-Customer Change: 108.0  
-
-### history.txt Expected Output
-Gary [steak, steak, steak, steak] 42.0 150.0 108.0
+### Main algorithm
+- The main class parses args, and if they exist
+    - If the first argument is "parse"
+        - It opens the following argument as a file
+        - ParseInputFileRepo loads the file and the readAll method of that class will take the file contents and place them into a List of Customer Tickets
+        - Each CustomerTicket is handled via a transaction with the Cashier class
+        - The List is passed to an Order repository to insert all orders to a sql database
+        - OrderRepository queries the database for all orders
+        - The returned List of Orders is placed into an order history class which holds a list of Customer Tickets
+        - The List of Customer Tickets in the order history class is written to a history text file and is also printed to the console
+    - Else it parses the args as a single Order
+        - The Order will be placed into a Customer Ticket
+        - Each CustomerTicket is handled via a transaction with the Cashier class
+        - The CustomerTicket is passed to an Order repository to insert to a sql database
+        - OrderRepository queries the database for all orders
+        - The returned List of Orders is placed into an order history class which holds a list of Customer Tickets
+        - The List of Customer Tickets in the order history class is written to a history text file and is also printed to the console
+- Else a usage guide is printed to the console

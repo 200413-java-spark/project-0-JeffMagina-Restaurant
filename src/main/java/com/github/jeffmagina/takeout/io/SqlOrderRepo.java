@@ -1,5 +1,6 @@
-package com.github.jeffmagina.io;
+package com.github.jeffmagina.takeout.io;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
-import com.github.jeffmagina.restaurant.customerticket.order.Order;
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.customerticket.order.Order;
 
 public class SqlOrderRepo implements Dao<CustomerTicket> {
 
@@ -38,9 +39,9 @@ public class SqlOrderRepo implements Dao<CustomerTicket> {
 			PreparedStatement orderStmt = conn.prepareStatement(
 					"insert into customerTicket(customerID,orderCost,paymentAmount,changeGiven) values (?, ?, ?, ?)");
 			orderStmt.setInt(1, customerTicket.customer.customerId);
-			orderStmt.setDouble(2, customerTicket.orderCost);
-			orderStmt.setDouble(3, customerTicket.paymentAmount);
-			orderStmt.setDouble(4, customerTicket.changeGiven);
+			orderStmt.setDouble(2, customerTicket.orderCost.doubleValue());
+			orderStmt.setDouble(3, customerTicket.paymentAmount.doubleValue());
+			orderStmt.setDouble(4, customerTicket.changeGiven.doubleValue());
 			orderStmt.addBatch();
 			orderStmt.executeBatch();
 
@@ -72,8 +73,8 @@ public class SqlOrderRepo implements Dao<CustomerTicket> {
 					customerTicket.order.get(i).orderItemId = orderTicketIDrs.getInt("orderItemID");
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
 		}
 
 	}
@@ -91,9 +92,9 @@ public class SqlOrderRepo implements Dao<CustomerTicket> {
 				CustomerTicket customerTicket = new CustomerTicket();
 				customerTicket.customerTicketId = customerTicketrs.getInt("customerTicketID");
 				customerTicket.customer.customerId = customerTicketrs.getInt("customerID");
-				customerTicket.orderCost = customerTicketrs.getDouble("orderCost");
-				customerTicket.paymentAmount = customerTicketrs.getDouble("paymentAmount");
-				customerTicket.changeGiven = customerTicketrs.getDouble("changeGiven");
+				customerTicket.orderCost = BigDecimal.valueOf(customerTicketrs.getDouble("orderCost")).setScale(2);
+				customerTicket.paymentAmount = BigDecimal.valueOf(customerTicketrs.getDouble("paymentAmount")).setScale(2);
+				customerTicket.changeGiven = BigDecimal.valueOf(customerTicketrs.getDouble("changeGiven")).setScale(2);
 				customerTickets.add(customerTicket);
 			}
 
@@ -117,8 +118,8 @@ public class SqlOrderRepo implements Dao<CustomerTicket> {
 					
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
 		}
 		return customerTickets;
 

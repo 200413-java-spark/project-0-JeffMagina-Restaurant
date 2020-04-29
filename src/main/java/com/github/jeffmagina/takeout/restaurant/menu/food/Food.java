@@ -1,4 +1,5 @@
-package com.github.jeffmagina.restaurant.menu.food;
+package com.github.jeffmagina.takeout.restaurant.menu.food;
+
 
 public class Food {
     public String name;

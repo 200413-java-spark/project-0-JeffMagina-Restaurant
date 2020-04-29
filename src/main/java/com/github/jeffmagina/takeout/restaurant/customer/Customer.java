@@ -1,4 +1,4 @@
-package com.github.jeffmagina.restaurant.customer;
+package com.github.jeffmagina.takeout.restaurant.customer;
 
 public class Customer {
 	

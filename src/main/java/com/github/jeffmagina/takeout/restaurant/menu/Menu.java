@@ -1,13 +1,14 @@
-package com.github.jeffmagina.restaurant.menu;
+package com.github.jeffmagina.takeout.restaurant.menu;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import com.github.jeffmagina.restaurant.menu.food.Food;
+import com.github.jeffmagina.takeout.restaurant.menu.food.Food;
 
 public class Menu {
 
 	// Create menu storage
-	private ArrayList<Food> menu = new ArrayList<Food>();
+	public ArrayList<Food> menu = new ArrayList<Food>();
 
 	public Menu() {
 		populateMenu();
@@ -28,7 +29,7 @@ public class Menu {
 
 	public void displayMenu() {
 		for (int i = 0; i < this.menu.size(); i++) {
-			System.out.println(this.menu.get(i).name + ", " + this.menu.get(i).cost);
+			System.out.println(this.menu.get(i).name + ", $" + BigDecimal.valueOf(this.menu.get(i).cost).setScale(2));
 		}
 	}
 
@@ -41,6 +42,17 @@ public class Menu {
 			throw new IndexOutOfBoundsException("Index: " + i + ", Size " + i);
 		}
 		return this.menu.get(i);
+	}
+	
+	public boolean contains(String name)
+	{
+		boolean checkMenu = false;
+		for(int i = 0; i < menu.size(); i++) {
+			if(name.equals(menu.get(i).name)){
+				checkMenu = true;
+			} 
+		}
+		return checkMenu;
 	}
 
 }

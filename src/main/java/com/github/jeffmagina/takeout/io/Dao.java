@@ -1,4 +1,4 @@
-package com.github.jeffmagina.io;
+package com.github.jeffmagina.takeout.io;
 
 import java.util.List;
 

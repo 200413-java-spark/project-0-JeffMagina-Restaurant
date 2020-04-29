@@ -1,8 +1,9 @@
-package com.github.jeffmagina.restaurant.cashier;
+package com.github.jeffmagina.takeout.restaurant.cashier;
 
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
-import com.github.jeffmagina.restaurant.menu.Menu;
+import java.math.BigDecimal;
 
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.menu.Menu;
 
 public class Cashier {
 
@@ -38,20 +39,20 @@ public class Cashier {
 
 	private void transaction() {
 		this.customerTicket.orderCost = calcCost(this.customerTicket);
-		System.out.println("\nThe cost of your order is: " + this.customerTicket.orderCost);
-		System.out.println("\nYour payment amount was: " + this.customerTicket.paymentAmount);
+		System.out.println("\nThe cost of your order is: $" + this.customerTicket.orderCost);
+		System.out.println("\nYour payment amount was: $" + this.customerTicket.paymentAmount);
 
-		this.customerTicket.changeGiven = this.customerTicket.paymentAmount - this.customerTicket.orderCost;
+		this.customerTicket.changeGiven = this.customerTicket.paymentAmount.subtract(this.customerTicket.orderCost);
 
-		if (this.customerTicket.changeGiven >= 0) {
-			System.out.println("\nYour change is: " + this.customerTicket.changeGiven);
+		if (this.customerTicket.changeGiven.doubleValue() >= 0) {
+			System.out.println("\nYour change is: $" + this.customerTicket.changeGiven);
 		} else {
 			System.out.println("\nInsufficient funds! Come back sufficient funds!\n");
 			System.exit(0);
 		}
 	}
 
-	private double calcCost(CustomerTicket customerTicket) {
+	private BigDecimal calcCost(CustomerTicket customerTicket) {
 		double cost = 0.0;
 		for (int i = 0; i < customerTicket.order.size(); i++) {
 			for (int j = 0; j < this.menu.size(); j++) {
@@ -60,6 +61,7 @@ public class Cashier {
 				}
 			}
 		}
-		return cost;
+		
+		return BigDecimal.valueOf(cost).setScale(2);
 	}
 }

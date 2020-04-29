@@ -1,4 +1,4 @@
-package com.github.jeffmagina.io;
+package com.github.jeffmagina.takeout.io;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class SqlDataSource {
 	private static String password;
 
 	static {
-		url = System.getProperty("database.url", "jdbc:postgresql://18.216.94.221:5432/jeffMagina");
+		url = System.getProperty("database.url", "jdbc:postgresql://52.15.176.248:5432/jeffMagina");
 		user = System.getProperty("database.username", "jeffMagina");
 		password = System.getProperty("database.password", "jeffMagina");
 	}

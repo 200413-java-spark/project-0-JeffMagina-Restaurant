@@ -1,29 +1,30 @@
-package com.github.jeffmagina.restaurant.customerticket;
+package com.github.jeffmagina.takeout.restaurant.customerticket;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import com.github.jeffmagina.restaurant.customer.Customer;
-import com.github.jeffmagina.restaurant.customerticket.order.Order;
+import com.github.jeffmagina.takeout.restaurant.customer.Customer;
+import com.github.jeffmagina.takeout.restaurant.customerticket.order.Order;
 
 public class CustomerTicket {
 	public int customerTicketId;
 	public Customer customer;
 	public ArrayList<Order> order;
-	public double paymentAmount;
-	public double orderCost;
-	public double changeGiven;
+	public BigDecimal paymentAmount;
+	public BigDecimal orderCost;
+	public BigDecimal changeGiven;
 
 	public CustomerTicket() {
 		this.customer = new Customer();
 		this.order = new ArrayList<Order>();
 	}
 
-	public CustomerTicket(Customer customer, ArrayList<Order> order, double paymentAmount, double orderCost, double changeGiven) {
+	public CustomerTicket(Customer customer, ArrayList<Order> order, double paymentAmount, double orderCost, double changeGiven) {			
 		this.customer = customer;
 		this.order = order;
-		this.paymentAmount = paymentAmount;
-		this.orderCost = orderCost;
-		this.changeGiven = changeGiven;
+		this.paymentAmount = BigDecimal.valueOf(paymentAmount).setScale(2);
+		this.orderCost = BigDecimal.valueOf(orderCost).setScale(2);
+		this.changeGiven = BigDecimal.valueOf(changeGiven).setScale(2);
 	}
 
 	public void displayCustomerTicket() {

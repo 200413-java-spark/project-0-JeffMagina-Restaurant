@@ -2,14 +2,16 @@ package com.github.jeffmagina.restaurant.cashier;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.jeffmagina.restaurant.customer.Customer;
-import com.github.jeffmagina.restaurant.customerticket.CustomerTicket;
-import com.github.jeffmagina.restaurant.customerticket.order.Order;
+import com.github.jeffmagina.takeout.restaurant.cashier.Cashier;
+import com.github.jeffmagina.takeout.restaurant.customer.Customer;
+import com.github.jeffmagina.takeout.restaurant.customerticket.CustomerTicket;
+import com.github.jeffmagina.takeout.restaurant.customerticket.order.Order;
 
 public class CashierInteractionTest {
 	Cashier testCashier = new Cashier();
@@ -31,7 +33,7 @@ public class CashierInteractionTest {
 		testOrderArray.add(testOrder);
 		
 		testCustomerTicket.order = testOrderArray;
-		testCustomerTicket.paymentAmount = 100.00;
+		testCustomerTicket.paymentAmount = BigDecimal.valueOf(100.00);
 		
 		System.out.print("");
 	}
@@ -44,8 +46,8 @@ public class CashierInteractionTest {
 		CustomerTicket actual = testCashier.interaction(testCustomerTicket);
 		
 		//Assert
-		assertEquals(expected.orderCost, actual.orderCost,0.00);
-		assertEquals(expected.changeGiven, actual.changeGiven,0.00);
+		assertEquals(expected.orderCost.doubleValue(), actual.orderCost.doubleValue(),0.00);
+		assertEquals(expected.changeGiven.doubleValue(), actual.changeGiven.doubleValue(),0.00);
 	}
 	
 
